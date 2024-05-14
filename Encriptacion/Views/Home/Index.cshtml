@@ -1,0 +1,74 @@
+﻿@model Tuple<string, string>
+
+<style>
+    body {
+        text-align: center;
+    }
+
+    form {
+        margin: 50px auto;
+        width: 400px;
+        text-align: left;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        font-size: 16px;
+    }
+
+    input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        font-size: 16px;
+    }
+
+    button[type="submit"] {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+    }
+
+    h2 {
+        margin-top: 50px;
+    }
+</style>
+
+<h1>Cifrado César</h1>
+
+@if (ViewBag.MensajeCifrado == null && ViewBag.MensajeDescifrado == null)
+{
+    <form method="post" asp-action="Cifrar">
+        <div>
+            <label for="mensaje">Mensaje:</label>
+            <input type="text" id="mensaje" name="mensaje" style="height: 100px;" />
+        </div>
+        <div>
+            <label for="clave">Clave:</label>
+            <input type="number" id="clave" name="clave" />
+        </div>
+        <button type="submit">Cifrar</button>
+    </form>
+}
+
+@if (ViewBag.MensajeCifrado != null)
+{
+    <h2>Mensaje Cifrado:</h2>
+    <p>@ViewBag.MensajeCifrado</p>
+    <form method="post" asp-action="Descifrar">
+        <input type="hidden" name="mensajeCifrado" value="@ViewBag.MensajeCifrado" />
+        <input type="hidden" name="clave" value="@ViewBag.Clave" />
+        <button type="submit">Desencriptar mensaje</button>
+    </form>
+}
+
+@if (ViewBag.MensajeDescifrado != null)
+{
+    <h2>Mensaje Descifrado:</h2>
+    <p>@ViewBag.MensajeDescifrado</p>
+}
